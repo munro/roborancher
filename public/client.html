@@ -23,11 +23,22 @@
         </script>
     </head>
     <body>
-        <div class="center"> 
-            <div id="header">
+        <div id="app">
+
+            <div id="login">
                 <h1>Robo Rancher</h1>
+                <p>Welcome!  Use your Github account to login!</p>
+                <p><a id="login" 
+                        href="https://github.com/login/oauth/authorize?client_id=58f4d351561bdf1f004c">
+                        Login via GitHub</a>
             </div>
+        
             <div id="game">
+		        <div class="header">
+		            <h1>Robo Rancher</h1>
+		            <p id="welcome">Welcome!</p>
+		            <p><a id="logout" href="#">Log out</a></p>
+		        </div>
                 <div id="board">
                     <div></div>
                 </div>
@@ -48,6 +59,7 @@
                 </div>
                 
             </div>
+
         </div>
     </body>
 </html>
