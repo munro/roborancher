@@ -23,7 +23,7 @@ PriorityQueue.prototype.size = function() {
   return this.priority_array.length;
 }
 
-
+exports.PriorityQueue = PriorityQueue;
 
 /*
  * unit tests
