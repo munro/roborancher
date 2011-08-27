@@ -12,7 +12,8 @@
   "dependencies": {
     "nko": "~0.1.0",
     "connect": "1.6.4",
-    "socket.io": "0.7.9"
+    "socket.io": "0.7.9",
+    "qs": "0.3.1"
   },
   "devDependencies": {}
 }

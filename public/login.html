@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>ROBO RANCHERS!!!</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="/css/reset.css" />
+        <link rel="stylesheet" href="/css/formalize.css" />
+        <link rel="stylesheet" href="/css/screen.less" type="text/less" media="screen" />
+        <script src="/js/jquery-1.6.2.js"></script> 
+        <script src="/js/socket.io/socket.io.js"></script>
+        <script src="/js/jquery.formalize.js"></script>
+        <script src="/js/less-1.1.3.min.js"></script>
+        <script src="/js/underscore-min.js"></script>
+        <script data-main="/lib/main" src="/js/require.js"></script>
+        <script>
+            var socket = io.connect('http://localhost:7777');
+            socket.on('news', function (data) {
+                console.log(data);
+                socket.emit('my other event', { my: 'data' });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="center"> 
+
+        <div id="login">
+            <h1>Robo Rancher</h1>
+            <p>Welcome!  Use your Github account to login!</p>
+            <a id="login" 
+                    href='https://github.com/login/oauth/authorize?client_id=58f4d351561bdf1f004c'>
+                    Login via GitHub</a> 
+        </div>
+        </div>
+    </body>
+</html>
