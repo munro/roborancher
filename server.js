@@ -1,43 +1,13 @@
 var connect = require('connect'), 
     nko = require('nko')('BB3sRa2b2FOSfcCw'),
-    Cookies = require('cookies'),
     github = require('./github');
-
-function redirect(res, urlString) { 
-    res.writeHead(302, {
-        'Location': urlString
-    });
-    res.end();
-}
-
-function completeAuthentication(req, res) {
-    cookies = new Cookies(req, res);
-    cookies.set('authenticated', 'true', { httpOnly: false });
-    cookies.set('username', req.session.username, { httpOnly: false });
-
-    redirect(res, '/client.html');
-}
-
-function authenticate(req, res, next) {
-    if (req.session.accessToken && req.session.username)
-        completeAuthentication(req, res);
-    else
-        github.handleAuthentication(req, res, next, function(accessToken) {
-            github.getUserInfo(accessToken, function(username) {
-                req.session.accessToken = accessToken;
-                req.session.username = username;
-
-                completeAuthentication(req, res);
-            });
-        });
-}
 
 // Start connect
 var server = connect(
     connect.cookieParser(),
     connect.session({ secret: 'my lungs are full of bees' }),
     connect.router(function(app) {
-        app.get('/authenticate', authenticate);
+        github.route(app);
     }),
     connect.static(__dirname + '/public'),
     connect.directory(__dirname + '/public')
@@ -56,7 +26,35 @@ server.listen(process.env.NODE_ENV === 'production' ? 80 : 7777, function() {
 });
 
 // Start socket.io
+var codes = {};
 var io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
-    socket.emit('login', {hello: 'world'});
+    socket.emit('client_id', github.client_id);
+    socket.on('login', function (code, callback) {
+        var access_token = codes[code];
+        function post_token() {
+            if (!access_token) {
+                callback('Session has expired');
+            }
+            github.getUserInfo(access_token, function (data) {
+                if (!data) {
+                    callback('No data...');
+                } if (data.error) {
+                    callback(data.error);
+                } else if (!data.user || !data.user.login) {
+                    callback('Could not get login name');
+                } else {
+                    callback(false, data.user.login);
+                }
+            });
+        }
+        if (!access_token) {
+            github.getAccessToken(code, function (data) {
+                access_token = data;
+                post_token();
+            });
+        } else {
+            post_token();
+        }
+    });
 });

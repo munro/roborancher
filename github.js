@@ -1,37 +1,21 @@
-var GITHUB_OAUTH2_CLIENT_ID = '58f4d351561bdf1f004c';
-var GITHUB_OAUTH2_SECRET_CODE = 'a300fe946ad8b7720f74cd5048448aede3dc8bf5';
+var GITHUB_OAUTH2_CLIENT_ID =
+    process.env.GITHUB_OAUTH2_CLIENT_ID || '58f4d351561bdf1f004c';
+var GITHUB_OAUTH2_SECRET_CODE =
+    process.env.GITHUB_OAUTH2_SECRET_CODE || 'a300fe946ad8b7720f74cd5048448aede3dc8bf5';
+
+exports.client_id = GITHUB_OAUTH2_CLIENT_ID;
 
 var url = require('url'),
     qs = require('qs'),
-    https = require('https');
+    https = require('https'),
+    fs = require('fs');
 
-function redirect(res, urlString) { 
-    res.writeHead(302, {
-        'Location': urlString
-    });
-    res.end();
-}
-
-function authenticate(req, res, next) {
-    if (req.session.accessToken) {
-        redirect(res, '/client.html');
-    } else {
-        handleAuthentication(req, res, next, function(accessToken) {
-            req.session.accessToken = accessToken;
-            redirect(res, '/client.html');
-        });
-    }
-}
-
+// This should be removed, and the OAuth callback should be to /
 exports.route = function (app) {
-    app.get('/', function (req, res) {
-        if (req.session.accessToken) {
-            return redirect(res, '/client.html');
-        } else {
-            return redirect(res, '/login.html');
-        }
+    app.get('/authenticate', function (req, res) {
+        var file = fs.createReadStream(__dirname + '/public/index.html');
+        file.pipe(res);
     });
-    app.get('/authenticate', authenticate);
 };
 
 function makeHTTPSRequest(urlString, callback) {
@@ -48,7 +32,7 @@ function makeHTTPSRequest(urlString, callback) {
     request.end();
 }
 
-function getAccessToken(authCode, callback) {
+exports.getAccessToken = function (authCode, callback) {
     var ghUrl = 'https://github.com/login/oauth/access_token?code=' + authCode 
             + '&client_secret=' + GITHUB_OAUTH2_SECRET_CODE 
             + '&client_id=' + GITHUB_OAUTH2_CLIENT_ID;
@@ -65,13 +49,7 @@ function getAccessToken(authCode, callback) {
     });
 }
 
-function handleAuthentication(req, res, next, callback) {
-    params = qs.parse(url.parse(req.url).query);
-    accessCode = params.code;
-    getAccessToken(params.code, callback);
-}
-
-function getUserInfo(accessToken, callback) {
+exports.getUserInfo = function (accessToken, callback) {
     var ghUrl = 'https://github.com/api/v2/json/user/show?access_token=' + accessToken;
 
     makeHTTPSRequest(ghUrl, function(response) {
@@ -81,10 +59,7 @@ function getUserInfo(accessToken, callback) {
         });
         response.on('end', function() {
             data = JSON.parse(jsonData);
-            callback(data['user']['login']);
+            callback(data);
         });
     });
 }
-
-exports.handleAuthentication = handleAuthentication;
-exports.getUserInfo = getUserInfo;
