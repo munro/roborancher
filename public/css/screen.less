@@ -1,0 +1,39 @@
+@import '/css/grid.less';
+
+@columns: 12;
+@column-width: 60;
+@gutter-width: 20;
+
+div.center {
+    width: 960px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+body {
+    font-family: Georgia, sans-serif;
+    font-size: 25px;
+}
+h1 {
+    font-size: 40px;
+}
+p {
+    margin: 10px 0px;
+}
+
+/* login */
+#login {
+    .column(12);
+}
+#login label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+#login input {
+    width: 200px;
+}
+#login button {
+    display: block;
+    margin-top: 10px;
+}

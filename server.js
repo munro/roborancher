@@ -1,11 +1,16 @@
-var http = require('http'),
-  nko = require('nko')('BB3sRa2b2FOSfcCw');
+var connect = require('connect'),
+    nko = require('nko')('BB3sRa2b2FOSfcCw');
 
-var app = http.createServer(function (req, res) { 
-  res.writeHead(200, { 'Content-Type': 'text/html' }); 
-  res.end('Hello, World'); 
+// Start connect
+var server = connect(
+    connect.static(__dirname + '/public'),
+    connect.directory(__dirname + '/public')
+)
+server.listen(7777);
+console.log('Listening on 7777');
+
+// Start socket.io
+var io = require('socket.io').listen(server);
+io.sockets.on('connection', function (socket) {
+    socket.emit('news', {hello: 'world'});
 });
-
-app.listen(parseInt(process.env.PORT) || 7777); 
-console.log('Listening on ' + app.address().port);
-
