@@ -30,8 +30,17 @@ var server = connect(
         app.get('/authenticate', authenticate);
     })
 )
-server.listen(7777);
-console.log('Listening on 7777');
+
+server.listen(process.env.NODE_ENV === 'production' ? 80 : 7777, function() {
+  console.log('Server Ready');
+
+  // if run as root, downgrade to the owner of this file
+  if (process.getuid() === 0)
+    require('fs').stat(__filename, function(err, stats) {
+      if (err) return console.log(err)
+      process.setuid(stats.uid);
+    });
+});
 
 // Start socket.io
 var io = require('socket.io').listen(server);
