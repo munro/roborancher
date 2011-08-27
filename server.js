@@ -1,5 +1,4 @@
 var connect = require('connect'),
-    io = require('socket.io-connect'),
     nko = require('nko')('BB3sRa2b2FOSfcCw');
 
 var github = require('./github');
