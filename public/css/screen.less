@@ -4,6 +4,15 @@
 @column-width: 60;
 @gutter-width: 20;
 
+/* mixins */
+.rounded-corners (@radius: 5px) {
+    border-radius: @radius;
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+}
+
+
+/* global */
 div.center {
     width: 960px;
     margin: 0 auto;
@@ -21,6 +30,11 @@ p {
     margin: 10px 0px;
 }
 
+/* header */
+#header {
+    .column(12);
+}
+
 /* login */
 #login {
     .column(12);
@@ -36,4 +50,30 @@ p {
 #login button {
     display: block;
     margin-top: 10px;
+}
+
+/* game */
+#game {
+    .column(12);
+    #my_cards {
+        .row(12);
+        li {
+            background-color: grey;
+            height: 195px;
+            .rounded-corners();
+            border: 1px dashed black;
+
+            .column(2);
+        }
+    }
+}
+#board {
+    height: 450px;
+    div {
+        position: absolute;
+        width: 45px;
+        height: 45px;
+        background-color: grey;
+        border: 1px solid black;
+    }
 }
