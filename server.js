@@ -1,7 +1,7 @@
-var connect = require('connect'),
-    nko = require('nko')('BB3sRa2b2FOSfcCw');
-
-var github = require('./github');
+var connect = require('connect'), 
+    nko = require('nko')('BB3sRa2b2FOSfcCw'),
+    Cookies = require('cookies'),
+    github = require('./github');
 
 function redirect(res, urlString) { 
     res.writeHead(302, {
@@ -10,13 +10,25 @@ function redirect(res, urlString) {
     res.end();
 }
 
+function completeAuthentication(req, res) {
+    cookies = new Cookies(req, res);
+    cookies.set('authenticated', 'true', { httpOnly: false });
+    cookies.set('username', req.session.username, { httpOnly: false });
+
+    redirect(res, '/client.html');
+}
+
 function authenticate(req, res, next) {
-    if (req.session.accessToken)
-        redirect(res, '/client.html');
+    if (req.session.accessToken && req.session.username)
+        completeAuthentication(req, res);
     else
         github.handleAuthentication(req, res, next, function(accessToken) {
-            req.session.accessToken = accessToken;
-            redirect(res, '/client.html');
+            github.getUserInfo(accessToken, function(username) {
+                req.session.accessToken = accessToken;
+                req.session.username = username;
+
+                completeAuthentication(req, res);
+            });
         });
 }
 
@@ -45,5 +57,5 @@ server.listen(process.env.NODE_ENV === 'production' ? 80 : 7777, function() {
 // Start socket.io
 var io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
-    socket.emit('news', {hello: 'world'});
+    socket.emit('login', {hello: 'world'});
 });
