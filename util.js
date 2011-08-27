@@ -1,3 +1,6 @@
+/*
+ * PriorityQueue
+ */
 function PriorityQueue() {
   this.priority_array = [];
 };
@@ -26,19 +29,78 @@ PriorityQueue.prototype.size = function() {
 exports.PriorityQueue = PriorityQueue;
 
 /*
+ * StateGraph 
+ */
+
+function StateGraph() {
+  this.states = {};
+}
+
+StateGraph.prototype.state = function(name, fn) {
+  this.states [name] = fn;
+}
+
+StateGraph.prototype.go = function(name) {
+  var args = Array.prototype.slice.call(arguments, 1);
+  return (this.states[name] ? this.states[name] : function() {}).apply(this, args);
+}
+
+
+exports.StateGraph = StateGraph;
+
+/*
  * unit tests
  */
 if(0 == 1) {
-  var i, item, queue = new PriorityQueue();
+  var game = new StateGraph(),
+    numbers = new PriorityQueue(),
+    i;
 
+  /* random array */
   for(i = 0; i < 20; ++i) {
-    queue.push(Math.random(), 20 - i);
+    numbers.push(Math.random(), 20 - i);
   }
 
-  while(queue.size()) {
-    item = queue.pop();
+  game.state('start', function(numbers) {
+    console.log('Game start');
+  
+    if(!numbers.size())
+      return this.go('end', 0);
 
-    console.log('pri: ' + item.priority + ', value: ' + item.value);
-  }
+    return this.go('play-turn', numbers, numbers.pop().value, 0, 1);
+  });
+
+  game.state('play-turn', function(numbers, prev, score, turn) {
+    var guess, next;
+    
+    console.log('===Turn ' + turn + '===')
+
+    /* game over? */
+    if(!numbers.size())
+      return this.go('end', score);
+
+    /* make a guess */
+    guess = 10 < prev ? false : true;
+    console.log('Guess: The next number will be ' + (guess ? 'greater' : 'less') + ' than ' + prev + '.');
+
+    /* check guess, update score */
+    next = numbers.pop().value;
+    guess = guess ? next > prev : next < prev;
+    score += guess ? 1 : 0;
+    console.log('The number was ' + next + '.');
+    console.log('Guess was ' + (guess ? 'correct' : 'incorrect') + ', you score is ' + score + '.');
+
+    this.go('play-turn', numbers, next, score, turn + 1);
+  });
+
+  game.state('end', function(score) {
+    console.log('Final Score: ' + score);
+    console.log('Game Over!') ;
+  });
+
+
+  /* start game! */
+  game.go('start', numbers);
+
 }
 
