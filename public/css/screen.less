@@ -53,15 +53,26 @@ p {
 }
 
 /* game */
+.card {
+    background: url(/assets/card.png);
+    height: 195px;
+    width: 140px;
+    .title {
+        position: absolute;
+        margin: 15px 0px 0px 20px;
+        font-size: 10px;
+    }
+    .desc {
+        position: absolute;
+        margin: 50px 20px 20px 20px;
+        font-size: 10px;
+    }
+}
 #game {
     .column(12);
     #my_cards {
         .row(12);
         li {
-            background-color: grey;
-            height: 195px;
-            .rounded-corners();
-            border: 1px dashed black;
 
             .column(2);
         }
@@ -71,8 +82,8 @@ p {
     height: 450px;
     div {
         position: absolute;
-        width: 45px;
-        height: 45px;
+        width: 43px; /* subtraced 2px for temp border */
+        height: 43px;
         background-color: grey;
         border: 1px solid black;
     }
