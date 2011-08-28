@@ -56,9 +56,16 @@
             <div id="home">
                 <p>Welcome! RoboRancher is a multiplayer RoboRally inspired game!</p>
                 <p>
+                    To play, use your instruction cards to program your robot, and
+                    capture the flags before your friends!
+                </p>
+                <p>
                     To get started type in a name, and click &quot;Host Game&quot;.  Then you
                     will be given a link to share with your friends!
                 </p>
+                <p>
+                    For more instructions on how to play, please visit <a href="http://www.roborancher.com/how-to-play/">http://roborancher.com/how-to-play/</a>.
+                    This site works best with a stable version of Google Chrome.
                 <p>
                     <label for="your_name">Your Name</label>
                     <input id="your_name" type="text" maxlength="20" />
@@ -82,8 +89,9 @@
                 <p><input id="share_link" type="text" readonly="readonly" /></p>
                 <table class="players">
                 </table>
-                <p>Waiting for players.  Need at least 2 people to start game.</p>
+                <p>Waiting for players.  Maximum 4 people, or practice by yourself!</p>
                 <button id="start_game">Start Game</button>
+                <button id="abandon_game">Abandon Game</button>
             </div>
             <div id="game" style="display:none;">
                 <div id="board">
