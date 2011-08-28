@@ -1,15 +1,9 @@
 var connect = require('connect'), 
     nko = require('nko')('BB3sRa2b2FOSfcCw'),
-    github = require('./github'),
     Client = require('./lib/server/Client');
 
 // Start connect
 var server = connect(
-    connect.cookieParser(),
-    connect.session({ secret: 'my lungs are full of bees' }),
-    connect.router(function(app) {
-        github.route(app);
-    }),
     connect.static(__dirname + '/public'),
     connect.directory(__dirname + '/public')
 )

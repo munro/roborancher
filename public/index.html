@@ -18,7 +18,7 @@
         <script src="/js/jquery-ui-1.8.16.custom.min.js"></script>
         <script src="/js/jquery.cookie.js"></script>
         <script src="/js/spin.min.js"></script>
-        <script data-main="/lib/client/main" src="/js/require.js"></script>
+        <script src="/lib/client/main.js"></script>
         <script type="text/javascript">
             if (window.location.host !== 'localhost:7777') {
                 var _gaq = _gaq || [];
@@ -82,7 +82,7 @@
                 </div>
                 <div class="sidebar">
                     <div class="hand">
-                        <div>Please move cards from your hand into the register.</div>
+                        <div class="message">Please move cards from your hand into the register.</div>
                         <ul id="my_hand">
                             <li></li>
                             <li></li>
@@ -102,6 +102,7 @@
                             <li></li>
                             <li></li>
                         </ul>
+                        <button id="registers_done">Lock in</button>
                     </div>
                 </div>
                 <div class="players">
