@@ -68,3 +68,6 @@ cp tiles/wall-bottom.png tiles/wall-right.png
 mogrify -rotate 90 tiles/wall-left.png
 mogrify -rotate 180 tiles/wall-top.png
 mogrify -rotate 270 tiles/wall-right.png
+
+# move the bots which are not tiles
+mv tiles/robot* bots
