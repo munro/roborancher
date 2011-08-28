@@ -1,0 +1,70 @@
+#!/bin/bash
+cp "small tiles"/*.png tiles; mogrify -filter Point -resize 500% tiles/*.png
+
+# make the straight-ahead conveyors
+cp tiles/conveyor-left.png tiles/conveyor-up.png
+cp tiles/conveyor-left.png tiles/conveyor-right.png
+cp tiles/conveyor-left.png tiles/conveyor-down.png
+mogrify -rotate 90 tiles/conveyor-up.png
+mogrify -rotate 180 tiles/conveyor-right.png
+mogrify -rotate 270 tiles/conveyor-down.png
+
+# make the clockwise turns
+cp tiles/conveyor-left-up.png tiles/conveyor-up-right.png
+cp tiles/conveyor-left-up.png tiles/conveyor-right-down.png
+cp tiles/conveyor-left-up.png tiles/conveyor-down-left.png
+mogrify -rotate 90 tiles/conveyor-up-right.png
+mogrify -rotate 180 tiles/conveyor-right-down.png
+mogrify -rotate 270 tiles/conveyor-down-left.png
+
+# make the counterclockwise turns
+cp tiles/conveyor-left-up.png tiles/conveyor-right-up.png
+cp tiles/conveyor-up-right.png tiles/conveyor-up-left.png
+cp tiles/conveyor-right-down.png tiles/conveyor-left-down.png
+cp tiles/conveyor-down-left.png tiles/conveyor-down-right.png
+mogrify -flop tiles/conveyor-right-up.png
+mogrify -flop tiles/conveyor-up-left.png
+mogrify -flop tiles/conveyor-left-down.png
+mogrify -flop tiles/conveyor-down-right.png
+
+# make the fast straight ahead conveyors
+cp tiles/conveyor-fast-left.png tiles/conveyor-fast-up.png
+cp tiles/conveyor-fast-left.png tiles/conveyor-fast-right.png
+cp tiles/conveyor-fast-left.png tiles/conveyor-fast-down.png
+mogrify -rotate 90 tiles/conveyor-fast-up.png
+mogrify -rotate 180 tiles/conveyor-fast-right.png
+mogrify -rotate 270 tiles/conveyor-fast-down.png
+
+# make the fast clockwise turns
+cp tiles/conveyor-fast-left-up.png tiles/conveyor-fast-up-right.png
+cp tiles/conveyor-fast-left-up.png tiles/conveyor-fast-right-down.png
+cp tiles/conveyor-fast-left-up.png tiles/conveyor-fast-down-left.png
+mogrify -rotate 90 tiles/conveyor-fast-up-right.png
+mogrify -rotate 180 tiles/conveyor-fast-right-down.png
+mogrify -rotate 270 tiles/conveyor-fast-down-left.png
+
+# make the fast counterclockwise turns
+cp tiles/conveyor-fast-left-up.png tiles/conveyor-fast-right-up.png
+cp tiles/conveyor-fast-up-right.png tiles/conveyor-fast-up-left.png
+cp tiles/conveyor-fast-right-down.png tiles/conveyor-fast-left-down.png
+cp tiles/conveyor-fast-down-left.png tiles/conveyor-fast-down-right.png
+mogrify -flop tiles/conveyor-fast-right-up.png
+mogrify -flop tiles/conveyor-fast-up-left.png
+mogrify -flop tiles/conveyor-fast-left-down.png
+mogrify -flop tiles/conveyor-fast-down-right.png
+
+# make rotate counterclockwise
+cp tiles/rotate-once-cw.png tiles/rotate-once-ccw.png
+mogrify -flop tiles/rotate-once-ccw.png
+
+# make rotate twice counterclockwise
+cp tiles/rotate-twice-cw.png tiles/rotate-twice-ccw.png
+mogrify -flop tiles/rotate-twice-ccw.png
+
+# make the walls
+cp tiles/wall-bottom.png tiles/wall-top.png
+cp tiles/wall-bottom.png tiles/wall-left.png
+cp tiles/wall-bottom.png tiles/wall-right.png
+mogrify -rotate 90 tiles/wall-left.png
+mogrify -rotate 180 tiles/wall-top.png
+mogrify -rotate 270 tiles/wall-right.png

@@ -152,12 +152,21 @@ div.spinner {
     }
 }
 #board {
+    width: 900px;
     height: 450px;
+    border: 5px solid hotpink;
+    .floor {
+        background: url(/assets/tiles/floor.png);
+        width: 900px;
+        height: 450px;
+    }
     div {
         position: absolute;
-        width: 43px; /* subtraced 2px for temp border */
-        height: 43px;
+    }
+    div div {
+        position: absolute;
+        width: 45px;
+        height: 45px;
         background-color: grey;
-        border: 1px solid black;
     }
 }
