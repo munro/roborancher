@@ -95,7 +95,8 @@ p {
     padding-bottom: 10px;
 }
 
-#home-to-lobby {
+/* home-to-lobby */
+#loading {
     padding: 10px;
     text-align: center;
 }
@@ -105,22 +106,19 @@ div.spinner {
     margin-bottom: 15px;
 }
 
-
-/* login */
-#login {
+/* lobby */
+#lobby {
     .column(12);
-}
-#login label {
-    display: block;
-    margin-top: 10px;
-    margin-bottom: 5px;
-}
-#login input {
-    width: 200px;
-}
-#login button {
-    display: block;
-    margin-top: 10px;
+    #share_link {
+        width: 920px;
+        margin: 0 10px;
+    }
+    .players {
+        width: 100%;
+        .ready, .kick {
+            width: 25%;
+        }
+    }
 }
 
 /* game */

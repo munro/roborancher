@@ -38,21 +38,26 @@
                     <button>Host Game</button>
                 </fieldset>
             </div>
-            <div id="home-to-lobby" style="display:none;">
-                <p>Game is instantiating, please wait!</p>
+            <div id="loading" style="display:none;">
+                <p class="description"></p>
                 <div class="spinner"></div>
             </div>
-            <div id="login" style="display:none;">
-                <h1>Robo Rancher</h1>
-                <p>Welcome!  Use your Github account to login!</p>
-                <p><button>Login via GitHub</button></p>
+            <div id="lobby" style="display:none;">
+                <p>
+                    You are in the lobby.  To invite others to the game share the
+                    following link with your friends.
+                </p>
+                <p><input id="share_link" type="text" readonly="readonly" /></p>
+                <table class="players">
+                </table>
+                <p>Waiting for players.  Need at least 2 people to start game.</p>
+                <button id="start_game">Start Game</button>
             </div>
             <div id="game" style="display:none;">
                 <div id="#cards"></div>
 		        <div class="header">
 		            <h1>Robo Rancher</h1>
 		            <p id="welcome">Welcome!</p>
-		            <p><a id="logout" href="#">Log out</a></p>
 		        </div>
                 <div id="board">
                     <div class="floor"></div>
