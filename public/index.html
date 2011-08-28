@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>ROBO RANCHERS!!!</title>
+        <title>RoboRancher - A NodeJS game!</title>
         <meta charset="utf-8" />
         <meta name="author" content="Andrew Alm, Joel McGravy, Oliver Smith, Ryan Munro" />
         <meta name="description" content="RoboRancher is a fun multiplayer board game to play with your friends!  I swear!" />
@@ -53,16 +53,21 @@
         </div>
         <div class="center">
             <div id="home">
-                <p>Welcome!  A multiplayer RoboRally inspired game!</p>
+                <p>Welcome! RoboRancher is a multiplayer RoboRally inspired game!</p>
                 <p>
                     To get started type in a name, and click &quot;Host Game&quot;.  Then you
                     will be given a link to share with your friends!
                 </p>
-                <fieldset>
+                <p>
                     <label for="your_name">Your Name</label>
                     <input id="your_name" type="text" maxlength="20" />
-                    <button>Host Game</button>
-                </fieldset>
+                    <button class="host">Host</button>
+                </p>
+                <p>
+                    <label for="join_game">Join Game</label>
+                    <input id="join_game" type="text" maxlength="5" />
+                    <button class="join">Join</button>
+                </p>
             </div>
             <div id="loading" style="display:none;">
                 <p class="description"></p>
