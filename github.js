@@ -47,7 +47,7 @@ exports.getAccessToken = function (authCode, callback) {
             callback(accessToken);
         });
     });
-}
+};
 
 exports.getUserInfo = function (accessToken, callback) {
     var ghUrl = 'https://github.com/api/v2/json/user/show?access_token=' + accessToken;
@@ -62,4 +62,4 @@ exports.getUserInfo = function (accessToken, callback) {
             callback(data);
         });
     });
-}
+};
