@@ -15,6 +15,15 @@
     -khtml-user-select: none;
     user-select: none;
 }
+.center() {
+    width: 960px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.pointer() {
+    cursor: pointer;
+    cursor: hand;
+}
 
 /* form */
 button,
@@ -44,11 +53,6 @@ input[type="week"] {
 }
 
 /* global */
-.center() {
-    width: 960px;
-    margin: 0 auto;
-    overflow: hidden;
-}
 div.center {
     .center();
 }
@@ -130,13 +134,19 @@ div.spinner {
 }
 
 /* game */
+#my_cards {
+    position: absolute;
+}
+.card {
+    width: 65px;
+    height: 65px;
+    .pointer();
+    .non-selectable();
+    position: absolute;
+}
 #game {
     width: 965px;
     overflow: hidden;
-
-    .header {
-        .column(12);
-    }
     .hand {
         .column(8);
         margin-top: 20px;
@@ -219,6 +229,7 @@ div.spinner {
 }
 #board {
     .column(12);
+    margin-top: 20px;
     width: 900px;
     height: 450px;
     border: 20px solid hotpink;
