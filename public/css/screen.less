@@ -4,6 +4,9 @@
 @column-width: 60;
 @gutter-width: 20;
 
+/* colors */
+@block-bg: #CCCCCC;
+
 /* mixins */
 .rounded-corners (@radius: 5px) {
     border-radius: @radius;
@@ -87,7 +90,7 @@ p {
         padding: 5px;
     }
     box-shadow: 0 3px 5px #CCC;
-    background-color: #191919;
+    background-color: #303030;
     color: white;
     width: 100%;
 }
@@ -154,7 +157,7 @@ div.spinner {
             .hand {
                 .column(8);
                 margin-top: 20px;
-                background-color: #9E9E9E;
+                background-color: @block-bg;
                 .rounded-corners();
                 padding: 10px 10px;
                 width: 600px;
@@ -177,7 +180,7 @@ div.spinner {
             .registers {
                 .column(8);
                 margin-top: 20px;
-                background-color: #9E9E9E;
+                background-color: @block-bg;
                 .rounded-corners();
                 padding: 10px 10px;
                 width: 600px;
@@ -209,36 +212,37 @@ div.spinner {
         padding: 10px;
         width: 280px;
         margin-top: 20px;
-        background-color: #9E9E9E;
+        background-color: @block-bg;
         .rounded-corners();
         h2 {
             margin-bottom: 10px;
         }
     }
-    .chat {
-        .column(12);
-        margin-top: 20px;
-        .rounded-corners();
-        padding: 10px;
+
+}
+#chat {
+    .column(12);
+    margin-top: 20px;
+    .rounded-corners();
+    padding: 10px;
+    width: 920px;
+    background-color: @block-bg;
+    .messages {
         width: 920px;
-        background-color: #9E9E9E;
-        .messages {
-            width: 920px;
-            height: 200px;
-            background-color: #DCDCDC;
-            .rounded-corners();
-            overflow-x: auto;
-            overflow-y: scroll;
-            margin-bottom: 10px;
-        }
-        input {
-            width: 810px;
-        }
-        button {
-            width: 100px;
-            float: right;
-            margin-top: 1px;
-        }
+        height: 200px;
+        background-color: #DCDCDC;
+        .rounded-corners();
+        overflow-x: auto;
+        overflow-y: scroll;
+        margin-bottom: 10px;
+    }
+    input {
+        width: 810px;
+    }
+    button {
+        width: 100px;
+        float: right;
+        margin-top: 1px;
     }
 }
 #board {

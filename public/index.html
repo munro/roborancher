@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -21,8 +22,8 @@
         <script src="/js/jquery.cookie.js"></script>
         <script src="/js/spin.min.js"></script>
         <script src="/js/smoke/smoke.min.js"></script>
+        <script src="/js/jquery.ba-hashchange.min.js"></script>
         <script src="/lib/client/main.js"></script>
-        
         <script type="text/javascript">
             if (window.location.host !== 'localhost:7777') {
                 var _gaq = _gaq || [];
@@ -119,12 +120,12 @@
                 </div>
                 <div class="players">
                 </div>
-                <div class="chat">
-                    <div class="messages"></div>
-                    <div class="your_message">
-                        <input type="text" />
-                        <button>Send</button>
-                    </div>
+            </div>
+            <div id="chat" style="display:none;">
+                <div class="messages"></div>
+                <div class="your_message">
+                    <input type="text" />
+                    <button>Send</button>
                 </div>
             </div>
             <div id="footer">
