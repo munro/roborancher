@@ -14,10 +14,34 @@
         <script src="/js/underscore-min.js"></script>
         <script src="/js/jquery-ui-1.8.16.custom.min.js"></script>
         <script src="/js/jquery.cookie.js"></script>
+        <script src="/js/spin.min.js"></script>
         <script data-main="/lib/client/main" src="/js/require.js"></script>
     </head>
     <body>
+        <div id="header">
+            <div class="center">
+                <div>
+                    <h1>Robo Rancher</h1>
+                </div>
+            </div>
+        </div>
         <div class="center">
+            <div id="home">
+                <p>Welcome!  A multiplayer RoboRally inspired game!</p>
+                <p>
+                    To get started type in a name, and click &quot;Host Game&quot;.  Then you
+                    will be given a link to share with your friends!
+                </p>
+                <fieldset>
+                    <label for="your_name">Your Name</label>
+                    <input id="your_name" type="text" maxlength="20" />
+                    <button>Host Game</button>
+                </fieldset>
+            </div>
+            <div id="home-to-lobby" style="display:none;">
+                <p>Game is instantiating, please wait!</p>
+                <div class="spinner"></div>
+            </div>
             <div id="login" style="display:none;">
                 <h1>Robo Rancher</h1>
                 <p>Welcome!  Use your Github account to login!</p>
@@ -48,6 +72,15 @@
                         <li></li>
                     </ul>
                 </div>
+            </div>
+            <div id="footer">
+                <p>
+                    This kick ass NodeJS game was brought you by:
+                    <a href="http://github.com/shadowarts">Andrew Alm</a>,
+                    <a href="http://github.com/capttwinky">Joel McGravy</a>,
+                    <a href="http://github.com/all-iver">Oliver Smith</a>, and
+                    <a href="http://github.com/munro">Ryan Munro</a>.
+                </p>
             </div>
         </div>
     </body>

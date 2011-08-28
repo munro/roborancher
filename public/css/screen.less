@@ -16,29 +16,95 @@
     user-select: none;
 }
 
+/* form */
+button,
+input[type="reset"],
+input[type="submit"],
+input[type="button"] {
+    font-family: Georgia, sans-serif;
+    font-size: 20px;
+}
+textarea,
+select,
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"] {
+    font-family: Georgia, sans-serif;
+    font-size: 20px;
+}
 
 /* global */
-div.center {
+.center() {
     width: 960px;
     margin: 0 auto;
     overflow: hidden;
+}
+div.center {
+    .center();
+}
+.clear {
+    clear: both;
 }
 
 body {
     font-family: Georgia, sans-serif;
     font-size: 25px;
+    text-shadow: gray 0 1px 1px;
 }
 h1 {
     font-size: 40px;
 }
 p {
-    margin: 10px 0px;
+    margin: 20px 0px;
 }
 
 /* header */
 #header {
-    .column(12);
+    div div {
+        .column(12);
+        padding: 10px 0px;
+    }
+    box-shadow: 0 3px 5px #CCC;
+    background-color: #191919;
+    color: white;
+    width: 100%;
 }
+
+/* footer */
+#footer {
+    .column(12);
+    font-size: 12px;
+    color: rgb(160, 160, 160);
+    text-shadow: rgb(230, 230, 230) 0 1px 1px;
+}
+
+/* home */
+#home {
+    .column(12);
+    input { width: 400px; }
+    padding-bottom: 10px;
+}
+
+#home-to-lobby {
+    padding: 10px;
+    text-align: center;
+}
+div.spinner {
+    padding: 10px;
+    height: 20px;
+    margin-bottom: 15px;
+}
+
 
 /* login */
 #login {
