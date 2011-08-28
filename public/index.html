@@ -8,8 +8,10 @@
         <meta name="keywords" content="robo, rally, rancher, multiplayer, game, javascript, nodejs" />
         <link rel="stylesheet" href="/css/reset.css" />
         <link rel="stylesheet" href="/css/formalize.css" />
-        <link rel="stylesheet" href="css/sunny/jquery-ui-1.8.16.custom.css"/>
+        <link rel="stylesheet" href="/css/sunny/jquery-ui-1.8.16.custom.css"/>
         <link rel="stylesheet" href="/css/screen.less" type="text/less" media="screen" />
+        <link id="theme" rel="stylesheet" href="/js/smoke/themes/default.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="/js/smoke/smoke.css" media="screen" />
         <script src="/js/jquery-1.6.2.js"></script> 
         <script src="/js/socket.io/socket.io.js"></script>
         <script src="/js/jquery.formalize.js"></script>
@@ -18,7 +20,9 @@
         <script src="/js/jquery-ui-1.8.16.custom.min.js"></script>
         <script src="/js/jquery.cookie.js"></script>
         <script src="/js/spin.min.js"></script>
+        <script src="/js/smoke/smoke.min.js"></script>
         <script src="/lib/client/main.js"></script>
+        
         <script type="text/javascript">
             if (window.location.host !== 'localhost:7777') {
                 var _gaq = _gaq || [];
@@ -81,28 +85,30 @@
                     <div class="tiles"></div>
                 </div>
                 <div class="sidebar">
-                    <div class="hand">
-                        <div class="message">Please move cards from your hand into the register.</div>
-                        <ul id="my_hand">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                    </div>
-                    <div class="registers">
-                        <ul id="my_registers">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                        <button id="registers_done">Lock in</button>
+                    <div class="wrap">
+                        <div class="hand">
+                            <div class="message">Please move cards from your hand into the register.</div>
+                            <ul id="my_hand">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                        <div class="registers">
+                            <ul id="my_registers">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <button id="registers_done">Lock in</button>
+                        </div>
                     </div>
                 </div>
                 <div class="players">

@@ -147,49 +147,55 @@ div.spinner {
 #game {
     width: 965px;
     overflow: hidden;
-    .hand {
+    .sidebar {
         .column(8);
-        margin-top: 20px;
-        background-color: #9E9E9E;
-        .rounded-corners();
-        padding: 10px 10px;
-        width: 600px;
-        ul {
-            margin-left: 5px;
-            li {
-                width: 65px;
-                height: 65px;
-                margin: 10px 10px 5px 0;
-                background: url(/assets/cards/empty.png);
-                list-style: none;
-                float: left;
-                
+        .wrap {
+            .row(8);
+            .hand {
+                .column(8);
+                margin-top: 20px;
+                background-color: #9E9E9E;
+                .rounded-corners();
+                padding: 10px 10px;
+                width: 600px;
+                ul {
+                    margin-left: 5px;
+                    li {
+                        width: 65px;
+                        height: 65px;
+                        margin: 10px 10px 5px 0;
+                        background: url(/assets/cards/empty.png);
+                        list-style: none;
+                        float: left;
+                        
+                    }
+                    li:last-child {
+                        margin-right: 0px;
+                    }
+                }
             }
-            li:last-child {
-                margin-right: 0px;
-            }
-        }
-    }
-    .registers {
-        .column(8);
-        margin-top: 20px;
-        background-color: #9E9E9E;
-        .rounded-corners();
-        padding: 10px 10px;
-        width: 600px;
-        ul {
-            margin-left: 5px;
-            li {
-                width: 65px;
-                height: 65px;
-                margin: 10px 10px 5px 0;
-                background: url(/assets/cards/empty.png);
-                list-style: none;
-                float: left;
-                
-            }
-            li:last-child {
-                margin-right: 0px;
+            .registers {
+                .column(8);
+                margin-top: 20px;
+                background-color: #9E9E9E;
+                .rounded-corners();
+                padding: 10px 10px;
+                width: 600px;
+                ul {
+                    margin-left: 5px;
+                    li {
+                        width: 65px;
+                        height: 65px;
+                        margin: 10px 10px 5px 0;
+                        background: url(/assets/cards/empty.png);
+                        list-style: none;
+                        float: left;
+                        
+                    }
+                    li:last-child {
+                        margin-right: 0px;
+                    }
+                }
             }
         }
     }
@@ -205,6 +211,9 @@ div.spinner {
         margin-top: 20px;
         background-color: #9E9E9E;
         .rounded-corners();
+        h2 {
+            margin-bottom: 10px;
+        }
     }
     .chat {
         .column(12);
