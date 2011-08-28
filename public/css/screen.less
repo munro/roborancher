@@ -10,6 +10,11 @@
     -webkit-border-radius: @radius;
     -moz-border-radius: @radius;
 }
+.non-selectable() {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
 
 
 /* global */
@@ -54,6 +59,7 @@ p {
 
 /* game */
 .card {
+    .non-selectable();
     background: url(/assets/card.png);
     height: 195px;
     width: 140px;
@@ -73,8 +79,9 @@ p {
     #my_cards {
         .row(12);
         li {
-
             .column(2);
+            background: url(/assets/card_outline.png);
+            height: 195px;
         }
     }
 }
