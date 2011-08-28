@@ -74,6 +74,14 @@ p {
         .column(12);
         padding: 10px 0px;
     }
+    #voteNKO {
+        position: absolute;
+        margin-left: 940 - 125px;
+        margin-top: 5px;
+        background-color: white;
+        .rounded-corners();
+        padding: 5px;
+    }
     box-shadow: 0 3px 5px #CCC;
     background-color: #191919;
     color: white;
@@ -122,37 +130,74 @@ div.spinner {
 }
 
 /* game */
-.card {
-    .non-selectable();
-    background: url(/assets/card.png);
-    height: 195px;
-    width: 140px;
-    .title {
-        position: absolute;
-        margin: 15px 0px 0px 20px;
-        font-size: 10px;
-    }
-    .desc {
-        position: absolute;
-        margin: 50px 20px 20px 20px;
-        font-size: 10px;
-    }
-}
 #game {
-    .column(12);
-    #my_cards {
-        .row(12);
-        li {
-            .column(2);
-            background: url(/assets/card_outline.png);
-            height: 195px;
+    width: 965px;
+    overflow: hidden;
+
+    .header {
+        .column(12);
+    }
+    .hand {
+        .column(8);
+        margin-top: 20px;
+        background-color: #9E9E9E;
+        .rounded-corners();
+        padding: 10px 10px;
+        width: 600px;
+        ul {
+            margin-left: 5px;
+            li {
+                width: 65px;
+                height: 65px;
+                margin: 10px 10px 5px 0;
+                background: url(/assets/cards/forwards.png);
+                list-style: none;
+                float: left;
+                
+            }
+            li:last-child {
+                margin-right: 0px;
+            }
         }
+    }
+    .registers {
+        .column(8);
+        margin-top: 20px;
+        background-color: #9E9E9E;
+        .rounded-corners();
+        padding: 10px 10px;
+        width: 600px;
+        ul {
+            margin-left: 5px;
+            li {
+                width: 65px;
+                height: 65px;
+                margin: 10px 10px 5px 0;
+                background: url(/assets/cards/forwards.png);
+                list-style: none;
+                float: left;
+                
+            }
+            li:last-child {
+                margin-right: 0px;
+            }
+        }
+    }
+    .players {
+        .column(4);
+        padding: 10px;
+        width: 280px;
+        margin-top: 20px;
+        background-color: #9E9E9E;
+        .rounded-corners();
     }
 }
 #board {
+    .column(12);
     width: 900px;
     height: 450px;
-    border: 5px solid hotpink;
+    border: 20px solid hotpink;
+    .rounded-corners();
     .floor {
         background: url(/assets/tiles/floor.png);
         width: 900px;

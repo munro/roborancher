@@ -29,6 +29,13 @@ server.listen(process.env.NODE_ENV === 'production' ? 80 : 7777, function() {
 // Start socket.io
 var codes = {};
 var io = require('socket.io').listen(server);
+/*io.set('transports', [
+    'websocket',
+    'flashsocket',
+    'htmlfile',
+    'xhr-polling',
+    'jsonp-polling'
+]);*/
 io.sockets.on('connection', function (socket) {
     Client.join(socket);
 });
