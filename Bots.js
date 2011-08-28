@@ -1,4 +1,5 @@
 var util = require('./util');
+var dir = require('./direction');
 
 /* a bot isa collection of bot parts
  * a bot part hasa name and a list of information such that
@@ -8,6 +9,13 @@ var util = require('./util');
  *   thingSprite := link to sprite file
  *   thingSound := link to sound file (optional)
  */
+ 
+ north = dir.north;
+ east = dir.east;
+ south = dir.south;
+ west = dir. west;
+ 
+ lstDirs = [north,east,west,south];
  
 BotPart = function(){ 
     this.name="partName";
@@ -35,7 +43,7 @@ Bot = function(){
     this.top = Object.create(new BotPart);
     this.base =  Object.create(new BotPart);
     this.callbacks = {};
-    this.status = {damage: 0, postition: [0,0], direction: step: 0};
+    this.status = {damage: 0, postition: [0,0], direction: north, step: 0};
     this.sprite = "mySprite";
 }
 
@@ -53,7 +61,34 @@ Bot.prototype.takeDamage = function(intDamage){
     };
     return "took "+intDamage+" damage."
 };
-Bot.prototype.move = function(direction)
+Bot.prototype.move = function(type){
+    console.log("whoop");
+    switch(type){
+        case 'move':
+            return this.status.direction.move(this.status.position);
+            break;
+        case 'reverse':
+            return this.status.direction.move(this.status.position.behind);
+            break;
+        case 'turnLeft':
+            return(this.status.direction.turn('cw'));
+            break;
+        case 'turnRight':
+            return(this.status.direction.turn('ccw'));
+            break;
+        default:
+            return undefined
+    }
+};
+Bot.prototype.report = function(target){
+    for(myI in this){
+        target.log(myI+this[myI]);
+        for(myJ in this[myI]){
+            target.log(myI +" "+myJ+ "::" + this[myI][myJ])
+        }
+    }
+};
+
 
 /*example use and test
  */
@@ -79,17 +114,23 @@ if(true){
 
     myBot = Object.create(new Bot);
     myBot.init(myTopSpec, myBaseSpec);
-    //~ for(myI in myBot){
-        //~ console.log(myI+myBot[myI]);
-        //~ for(myJ in myBot[myI]){
-            //~ console.log(myI +" "+myJ+ "::" + myBot[myI][myJ])
-        //~ }
-    //~ }
-    console.log(myBot.health());
-    console.log(myBot.dead());
-    console.log(myBot.takeDamage(7));
-    console.log(myBot.health());
-    console.log(myBot.takeDamage(10));
-    console.log(myBot.health());
-    console.log(myBot.dead());
+    if(false){
+        myBot.report(console);
+        console.log(myBot.health());
+        console.log(myBot.dead());
+        console.log(myBot.takeDamage(7));
+        console.log(myBot.health());
+        console.log(myBot.takeDamage(10));
+        console.log(myBot.health());
+        console.log(myBot.dead());
+    };
+    if(true){
+        myBot.report(console);
+        myBot.move();
+        console.log(myBot.move('move'));
+        //~ console.log(myBot.move('reverse'));
+        //~ console.log(myBot.move('turnLeft'));
+        //~ console.log(myBot.move('turnRight'));
+    }
+    
 }

@@ -191,6 +191,31 @@ div.spinner {
         background-color: #9E9E9E;
         .rounded-corners();
     }
+    .chat {
+        .column(12);
+        margin-top: 20px;
+        .rounded-corners();
+        padding: 10px;
+        width: 920px;
+        background-color: #9E9E9E;
+        .messages {
+            width: 920px;
+            height: 200px;
+            background-color: #DCDCDC;
+            .rounded-corners();
+            overflow-x: auto;
+            overflow-y: scroll;
+            margin-bottom: 10px;
+        }
+        input {
+            width: 810px;
+        }
+        button {
+            width: 100px;
+            float: right;
+            margin-top: 1px;
+        }
+    }
 }
 #board {
     .column(12);

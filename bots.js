@@ -2,14 +2,11 @@ var util = require('./util');
 
 /* a bot isa collection of bot parts
  * a bot part hasa name and a list of information such that
- * information := [description, listAttributes, lstResources] where
  *   description := string descrition of the bot part
- *   listAttributes := [thingProp, thingCost] where
- *     thingProp := seralized string represneting this part's properties
- *     thingCost := weight, energy, "points" and other costs seralized
- *   listResources := [thingSprite, thingSound] where
- *     thingSprite := link to sprite file
- *     thingSound := link to sound file (optional)
+ *   thingProp := seralized string represneting this part's properties
+ *   thingCost := weight, energy, "points" and other costs seralized
+ *   thingSprite := link to sprite file
+ *   thingSound := link to sound file (optional)
  */
  
 BotPart = function(){ 
@@ -38,9 +35,9 @@ Bot = function(){
     this.top = Object.create(new BotPart);
     this.base =  Object.create(new BotPart);
     this.callbacks = {};
-    this.status = {damage: 0, postition: [0,0], step: 0};
+    this.status = {damage: 0, postition: [0,0], direction: step: 0};
+    this.sprite = "mySprite";
 }
-
 
 Bot.prototype.initPart = function(target, spec){target.init(spec)};
 Bot.prototype.init = function(topSpec, baseSpec){
@@ -56,10 +53,12 @@ Bot.prototype.takeDamage = function(intDamage){
     };
     return "took "+intDamage+" damage."
 };
+Bot.prototype.move = function(direction)
 
+/*example use and test
+ */
 
 if(true){
-
     var myTopSpec = {
         name:"Head unit 1", 
         desc:"first model for the top of the bot",
