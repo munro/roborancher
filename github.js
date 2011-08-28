@@ -3,6 +3,11 @@ var GITHUB_OAUTH2_CLIENT_ID =
 var GITHUB_OAUTH2_SECRET_CODE =
     process.env.GITHUB_OAUTH2_SECRET_CODE || 'a300fe946ad8b7720f74cd5048448aede3dc8bf5';
 
+if (process.env.NODE_ENV === 'production') {
+    GITHUB_OAUTH2_CLIENT_ID = '3228a68b846a9ae9022c';
+    GITHUB_OAUTH2_SECRET_CODE = '3f10b7d6f74d262af5cba92094133c1af3fe1699';
+}
+
 exports.client_id = GITHUB_OAUTH2_CLIENT_ID;
 
 var url = require('url'),
