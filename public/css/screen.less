@@ -214,8 +214,24 @@ div.spinner {
         margin-top: 20px;
         background-color: @block-bg;
         .rounded-corners();
-        h2 {
-            margin-bottom: 10px;
+        table {
+            .title {
+                font-weight: bold;
+                margin-top: 4px;
+            }
+            width: 100%;
+            .icon, .flags {
+                width: 45px;
+            }
+            .name {
+                word-break: break-word;
+                padding: 5px;
+            }
+            tr.self {
+                .name {
+                    color: #2630B1;
+                }
+            }
         }
     }
 
@@ -241,6 +257,11 @@ div.spinner {
         .message {
             white-space: pre;
             word-break: break-word;
+        }
+    }
+    .self {
+        .name {
+            color: #2630B1;
         }
     }
     input {
