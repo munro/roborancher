@@ -10,7 +10,6 @@
     "node": "~v0.4.10"
   },
   "dependencies": {
-    "nko": "~0.1.0",
     "connect": "1.6.4",
     "socket.io": "0.7.9"
   },

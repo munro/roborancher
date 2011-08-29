@@ -1,5 +1,4 @@
 var connect = require('connect'), 
-    nko = require('nko')('BB3sRa2b2FOSfcCw'),
     Client = require('./lib/server/Client');
 
 // Start connect
