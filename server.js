@@ -1,5 +1,5 @@
 var connect = require('connect'), 
-    Client = require('./lib/server/Client');
+    Client = require('./lib/Client');
 
 // Start connect
 var server = connect(
