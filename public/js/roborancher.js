@@ -128,6 +128,9 @@ var loader = {
 };
 
 var socket = io.connect(window.location.origin);
+socket.on('disconnect', function () {
+    smoke.alert('SERVER IS DOWN');
+});
 
 $(function () {
     var changing_hash = false;
