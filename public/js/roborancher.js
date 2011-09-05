@@ -129,7 +129,7 @@ var loader = {
 
 var socket = io.connect(window.location.origin);
 socket.on('disconnect', function () {
-    smoke.alert('SERVER IS DOWN');
+    smoke.alert('Lost connection');
 });
 
 $(function () {
