@@ -2,7 +2,7 @@
   "author": "0x0539",
   "name": "0x0539",
   "description": "RoboRally",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "repository": {
     "url": ""
   },
@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "connect": "1.6.4",
-    "socket.io": "0.7.9"
+    "socket.io": "0.7.9",
+    "underscore": "1.2.0"
   },
   "devDependencies": {}
 }
