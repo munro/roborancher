@@ -1,8 +1,43 @@
+// Auto restart server on file changes
+(function () {
+    var fs = require('fs'),
+        original = require.extensions['.js'];
+
+    function exitOnChange(filename) {
+        fs.watchFile(filename, function (curr, prev) {
+            if (curr.mtime !== prev.mtime) {
+                process.exit();
+            }
+        });
+    }
+    
+    require.extensions['.js'] = function (options) {
+        exitOnChange(options.filename);
+        original.apply(this, arguments);
+    };
+
+    exitOnChange(require.main.filename);
+}());
+
+console.log('');
+console.log('---- Starting server ----');
+
 var connect = require('connect'), 
-    Client = require('./lib/Client');
+    Client = require('./lib/Client'),
+    path = require('path');
 
 // Start connect
 var server = connect(
+    require('browserify')({
+        mount: '/roborancher.js',
+        entry: path.join(__dirname, 'lib/client/index.js'),
+        require: [
+            'underscore',
+            {jquery: 'jquery-browserify'},
+            {'socket.io':  'socket.io-client'}
+        ],
+        watch: true
+    }),
     connect.static(__dirname + '/public'),
     connect.directory(__dirname + '/public')
 )
@@ -32,3 +67,5 @@ var io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
     Client.join(socket);
 });
+
+//require('repl').start();

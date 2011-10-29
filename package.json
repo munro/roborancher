@@ -10,8 +10,10 @@
     "node": "~v0.4.10"
   },
   "dependencies": {
+    "browserify": "1.7.5",
     "connect": "1.6.4",
-    "socket.io": "0.7.9",
+    "jquery-browserify": "1.6.2",
+    "socket.io": "0.8.6",
     "underscore": "1.2.0"
   },
   "devDependencies": {}
