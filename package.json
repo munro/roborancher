@@ -10,10 +10,12 @@
     "node": "~v0.4.10"
   },
   "dependencies": {
+    "backbone-browserify": "0.5.3",
     "browserify": "1.7.5",
     "connect": "1.6.4",
     "jquery-browserify": "1.6.2",
     "socket.io": "0.8.6",
+    "socket.io-client": "git://github.com/edmellum/socket.io-client.git#427e77ee",
     "underscore": "1.2.0"
   },
   "devDependencies": {}

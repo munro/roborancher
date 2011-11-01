@@ -33,14 +33,15 @@ var server = connect(
         entry: path.join(__dirname, 'lib/client/index.js'),
         require: [
             'underscore',
-            {jquery: 'jquery-browserify'},
-            {'socket.io':  'socket.io-client'}
+            {'socket.io': 'socket.io-client'},
+            {backbone: 'backbone-browserify'},
+            {jquery: 'jquery-browserify'}
         ],
         watch: true
     }),
     connect.static(__dirname + '/public'),
     connect.directory(__dirname + '/public')
-)
+);
 
 server.listen(process.env.NODE_ENV === 'production' ? 80 : 7777, function() {
     console.log('Server Ready');
@@ -57,13 +58,6 @@ server.listen(process.env.NODE_ENV === 'production' ? 80 : 7777, function() {
 // Start socket.io
 var codes = {};
 var io = require('socket.io').listen(server);
-/*io.set('transports', [
-    'websocket',
-    'flashsocket',
-    'htmlfile',
-    'xhr-polling',
-    'jsonp-polling'
-]);*/
 io.sockets.on('connection', function (socket) {
     Client.join(socket);
 });
