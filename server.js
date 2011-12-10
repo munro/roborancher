@@ -24,11 +24,13 @@ console.log('---- Starting server ----');
 
 var connect = require('connect'), 
     Client = require('./lib/Client'),
-    path = require('path');
+    path = require('path'),
+    fs = require('fs'),
+    less = require('less');
 
 // Start connect
 var server = connect(
-    require('browserify')({
+    /*require('browserify')({
         mount: '/roborancher.js',
         entry: path.join(__dirname, 'lib/client/index.js'),
         require: [
@@ -38,9 +40,35 @@ var server = connect(
             {jquery: 'jquery-browserify'}
         ],
         watch: true
-    }),
-    connect.static(__dirname + '/public'),
+    }),*/
+    function (req, res, next) {
+        if (!req.url.match(/\.less$/)) {
+            return next();
+        }
+        var file = path.join(__dirname, 'public', path.resolve(req.url));
+        fs.readFile(file, 'utf8', function (err, data) {
+            if (err) {
+                return next();
+            }
+            try {
+                less.render(data, {}, function (err, css) {
+                    if (err) {
+                        res.writeHead(500, {'Content-Type': 'text/plain'});
+                        return res.end('error');
+                    }
+                    res.writeHead(200, {'Content-Type': 'text/plain'});
+                    res.end(css);
+                });
+            } catch (e) {
+                res.writeHead(500, {'Content-Type': 'text/plain'});
+                res.end('error');
+            }
+        });
+    },
+    connect['static'](__dirname + '/public'),
     connect.directory(__dirname + '/public')
+//    less.render(fs.readFileSync(path.join
+
 );
 
 server.listen(process.env.NODE_ENV === 'production' ? 80 : 7777, function() {

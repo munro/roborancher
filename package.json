@@ -18,5 +18,8 @@
     "socket.io-client": "git://github.com/edmellum/socket.io-client.git#427e77ee",
     "underscore": "1.2.0"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "scripts": {
+    "test": "./node_modules/expresso/bin/expresso test/structures/*"
+  }
 }
