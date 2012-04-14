@@ -12,12 +12,10 @@ Deck.prototype.drawCard = function() {
     return this.queue.pop();
 }
 
-
-
 /*
  * unit tests
  */
-if(0 == 1) {
+if(1 == 1) {
     var deck = new Deck();
 
     deck.addCard('card1');
@@ -27,4 +25,3 @@ if(0 == 1) {
     console.log(deck.drawCard());
     console.log(deck.drawCard());
 }
-
