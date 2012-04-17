@@ -21,6 +21,6 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "./node_modules/expresso/bin/expresso test/structures/*"
+    "test": "./node_modules/.bin/tap test"
   }
 }
