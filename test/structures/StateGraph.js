@@ -137,11 +137,27 @@ test('test substates', function (t) {
     });
 
     // movement
+    t.equal(graph.go('b', 'foo', 'bar'), b);
+    t.equal(graph.state(), b);
+    t.equal(graph.go('a'), a);
+    t.equal(graph.state(), a);
+    t.equal(graph.state().state(), undefined);
+    t.equal(graph.state().go('2', 1, 2, 3), a_2);
+    t.equal(graph.state().state(), a_2);
+    t.equal(graph.state().go('1', null, false), a_1);
+    t.equal(graph.state().state(), a_1);
+    t.equal(graph.state().go('2'), a_2);
+    t.equal(graph.state().state(), a_2);
+    t.equal(graph.go('b', 1), b);
+    t.equal(graph.state(), b);
+    graph.end();
+    t.equal(graph.state(), undefined);
 
     // test movement
     t.equal(
         q.join(','),
-        '+a,+a_1,-a_1,+a_2,-a_2,-a'
+        ('+a,+a_1,-a_1,+a_2,-a_2,-a,+b:foo:bar,-b,+a,+a_2:1:2:3,-a_2,' +
+         '+a_1::false,-a_1,+a_2,-a_2,-a,+b:1,-b')
     );
 
     t.end();
