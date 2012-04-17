@@ -34,8 +34,6 @@ test('test game', function (t) {
         oliver = Player();
 
     ryan.turnState('hello', 'world');
-    ryan.turnState('hello', 'world');
-    ryan.turnState('hello', 'world');
     console.log(ryan.__calls__);
 
     game.addPlayer(ryan);
