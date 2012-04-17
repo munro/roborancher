@@ -1,32 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>RoboRancher - A NodeJS game!</title>
         <meta charset="utf-8" />
+        <title>RoboRancher — A Node.js game!</title>
         <meta name="author" content="Andrew Alm, Joel McGrady, Oliver Smith, Ryan Munro" />
         <meta name="description" content="RoboRancher is a fun multiplayer board game to play with your friends!" />
         <meta name="keywords" content="robo, rally, rancher, multiplayer, game, javascript, nodejs" />
         <link rel="stylesheet" href="/css/reset.css" />
         <link rel="stylesheet" href="/css/formalize.css" />
-        <!--<link rel="stylesheet" href="/css/sunny/jquery-ui-1.8.16.custom.css"/>-->
-        <link id="theme" rel="stylesheet" href="/js/smoke/themes/default.css" type="text/css" media="screen" />
-        <link rel="stylesheet" href="/js/smoke/smoke.css" media="screen" />
-        <link rel="stylesheet" href="/css/screen.less" type="text/less" media="screen" />
+        <script src="/js/jquery.js"></script>
+        <script src="/js/jquery.formalize.js"></script>
+        <script src="/js/underscore.js"></script>
+        <script src="/js/backbone.js"></script>
         <script src="/roborancher.js"></script>
-        <script>
-            //var jQuery = require('jquery');
-        </script>
-        <!--<script src="/js/jquery.formalize.js"></script>-->
-        <script src="/js/less-1.1.3.min.js"></script>
-        <!--<script src="/js/jquery-1.6.2.js"></script> 
-        <script src="/js/socket.io/socket.io.js"></script>
-        <script src="/js/underscore-min.js"></script>
-        <script src="/js/jquery-ui-1.8.16.custom.min.js"></script>
-        <script src="/js/jquery.cookie.js"></script>
-        <script src="/js/spin.min.js"></script>
-        <script src="/js/smoke/smoke.min.js"></script>
-        <script src="/js/jquery.ba-hashchange.min.js"></script>
-        <script src="/js/roborancher.js"></script>
+        <!--
         <script type="text/javascript">
             if (window.location.host !== 'localhost:7777') {
                 var _gaq = _gaq || [];
@@ -37,136 +24,138 @@
                     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
                     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
                     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-                    
+
                 });
             }
             $(function () {
                 $('#voteNKO').attr('src', 'http://nodeknockout.com/iframe/0x0539');
             });
-        </script>-->
+        </script>
+        -->
     </head>
     <body>
-        <div id="my_cards"></div>
-        <div id="header">
-            <div class="center">
-                <div>
-                    <iframe id="voteNKO" frameborder="0" scrolling="no" allowtransparency="true" width="115" height="25"></iframe>
-                    <h1>Robo Rancher</h1>
-                </div>
-            </div>
+        <div id="no_js">
+            <h1>Robo Rancher</h1>
+            <p>To be able to play this game, you must have JavaScript enabled!</p>
         </div>
-        <div class="center">
-            <div id="home">
-                <p>Welcome! RoboRancher is a multiplayer RoboRally inspired game!</p>
-                <p>
-                    To play, use your instruction cards to program your robot and
-                    capture the flags before your friends!
-                </p>
-                <p>
-                    To get started, type in a name and click &quot;Host Game&quot;.  Then you
-                    will be given a link to share with your friends!
-                </p>
-                <p>
-                    For more instructions on how to play, please visit <a href="http://www.roborancher.com/how-to-play/">http://roborancher.com/how-to-play/</a>.
-                    This site works best with a stable version of Google Chrome.
-                <p>
-                    <label for="your_name">Your Name</label>
-                    <input id="your_name" type="text" maxlength="20" />
-                </p>
-                <p>
-                    Either host a game!
-                    <button class="host">Host</button>
-                </p>
-                <p>
-                    <label for="join_game">Or join a game</label>
-                    <input id="join_game" type="text" maxlength="5" />
-                    <button class="join">Join</button>
-                </p>
+        <script>$('#no_js').hide();</script>
+
+        <div id="home" style="display: none;">
+            <p>Welcome! RoboRancher is a multiplayer RoboRally inspired game!</p>
+            <p>
+                To play, use your instruction cards to program your robot and
+                capture the flags before your friends!
+            </p>
+            <p>
+                To get started, type in a name and click &quot;Host Game&quot;.  Then you
+                will be given a link to share with your friends!
+            </p>
+            <p>
+                For more instructions on how to play, please visit <a href="http://www.roborancher.com/how-to-play/">http://roborancher.com/how-to-play/</a>.
+                This site works best with a stable version of Google Chrome.
+            <p>
+                <label for="your_name">Your Name</label>
+                <input id="your_name" type="text" maxlength="20" />
+            </p>
+            <p>
+                Either host a game!
+                <button class="host">Host</button>
+            </p>
+            <p>
+                <label for="join_game">Or join a game</label>
+                <input id="join_game" type="text" maxlength="5" />
+                <button class="join">Join</button>
+            </p>
+        </div>
+        <script>$('#home').show();</script>
+
+        <div id="loading" style="display: none;">
+            <p class="description"></p>
+            <div class="spinner"></div>
+        </div>
+
+        <div id="lobby" style="display: none;">
+            <p>
+                You are in the lobby.  To invite others to the game share the
+                following link with your friends.
+            </p>
+            <p><input id="share_link" type="text" readonly="readonly" /></p>
+            <table class="players">
+            </table>
+            <p>Waiting for players.  Maximum 4 people, or practice by yourself!</p>
+            <button id="start_game">Start Game</button>
+            <button id="abandon_game">Abandon Game</button>
+        </div>
+
+        <div id="game" style="display: none;">
+            <div id="board">
+                <div class="floor"></div>
+                <div class="tiles"></div>
+                <div class="flags"></div>
+                <div class="bots"></div>
             </div>
-            <div id="loading" style="display:none;">
-                <p class="description"></p>
-                <div class="spinner"></div>
-            </div>
-            <div id="lobby" style="display:none;">
-                <p>
-                    You are in the lobby.  To invite others to the game share the
-                    following link with your friends.
-                </p>
-                <p><input id="share_link" type="text" readonly="readonly" /></p>
-                <table class="players">
-                </table>
-                <p>Waiting for players.  Maximum 4 people, or practice by yourself!</p>
-                <button id="start_game">Start Game</button>
-                <button id="abandon_game">Abandon Game</button>
-            </div>
-            <div id="game" style="display:none;">
-                <div id="board">
-                    <div class="floor"></div>
-                    <div class="tiles"></div>
-                    <div class="flags"></div>
-                    <div class="bots"></div>
-                </div>
-                <div class="sidebar">
-                    <div class="wrap">
-                        <div class="hand">
-                            <div class="message">Please move cards from your hand into the register.</div>
-                            <ul id="my_hand">
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                            </ul>
-                        </div>
-                        <div class="registers">
-                            <ul id="my_registers">
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                            </ul>
-                            <button id="registers_done">Lock in</button>
-                        </div>
+            <div class="sidebar">
+                <div class="wrap">
+                    <div class="hand">
+                        <div class="message">Please move cards from your hand into the register.</div>
+                        <ul id="my_hand">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                    <div class="registers">
+                        <ul id="my_registers">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                        <button id="registers_done">Lock in</button>
                     </div>
                 </div>
-                <div class="players">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="title" colspan="2">Players</th>
-                                <th><img src="/assets/tiles/flag.png" /></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="icon"><img src="/assets/tiles/flag.png" /></td>
-                                <td class="name">RAWR</td>
-                                <td class="flags">4</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
-            <div id="chat" style="display:none;">
-                <div class="messages"></div>
-                <div class="your_message">
-                    <input type="text" />
-                    <button>Send</button>
-                </div>
+            <div class="players">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="title" colspan="2">Players</th>
+                            <th><img src="/assets/tiles/flag.png" /></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="icon"><img src="/assets/tiles/flag.png" /></td>
+                            <td class="name">RAWR</td>
+                            <td class="flags">4</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div id="footer">
-                <p>
-                    This kick ass NodeJS game was brought you by:
-                    <a href="http://github.com/shadowarts">Andrew Alm</a>,
-                    <a href="http://github.com/capttwinky">Joel McGrady</a>,
-                    <a href="http://github.com/all-iver">Oliver Smith</a>, and
-                    <a href="http://github.com/munro">Ryan Munro</a>.
-                </p>
+        </div>
+
+        <div id="chat" style="display: none;">
+            <div class="messages"></div>
+            <div class="your_message">
+                <input type="text" />
+                <button>Send</button>
             </div>
+        </div>
+
+        <div id="footer">
+            <p>
+                This kick ass NodeJS game was brought you by:
+                <a href="http://github.com/shadowarts">Andrew Alm</a>,
+                <a href="http://github.com/capttwinky">Joel McGrady</a>,
+                <a href="http://github.com/all-iver">Oliver Smith</a>, and
+                <a href="http://github.com/munro">Ryan Munro</a>.
+            </p>
         </div>
     </body>
 </html>
