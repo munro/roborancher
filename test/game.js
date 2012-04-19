@@ -32,16 +32,41 @@ function proxyMock(obj) {
     return mock;
 }
 
-test('test game', function (t) {
-    var game = Game(),
-        ryan = proxyMock(Player()),
-        oliver = Player();
+function mockSocket(opts) {
+}
 
-    ryan.turnState('hello', 'world');
+function mockConnection(opts) {
+    var socket, connection;
+
+    socket = mockSocket();
+
+    connection = {
+    };
+
+    return {
+        socket: socket,
+        connection: connection
+    };
+}
+
+function mockPlayer(opts) {
+    var mock = mockConnection(), player;
+
+    player = {
+        socket: mock.socket
+    };
+
+    return _.extend(mock, {player: player});
+}
+
+test('test game', function (t) {
+    var game = Game(), ryan, oliver;
+
+    /*ryan.turnState('hello', 'world');
     console.log(ryan.__calls__);
 
     game.addPlayer(ryan);
-    game.addPlayer(oliver);
+    game.addPlayer(oliver);*/
 
     t.end();
 });

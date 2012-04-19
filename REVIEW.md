@@ -46,3 +46,11 @@ create the player object and join the game.
     * `createGame()` — Creates a new game!
 
 ## Client-Side
+
+## Design
+
+* Splash page - large graphic / info about game / host & join game buttons
+* About page - small logo / info about developers
+* Game lobby - link to this game / list of players / chat box
+* Game - board / list of pages & flags / chat box
+    * Finished game - overlay with stats / buttons play again & home
