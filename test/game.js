@@ -1,10 +1,14 @@
+/*jslint node: true, newcap: true, nomen: true */
+
+'use strict';
+
 var Game = require('../lib/Game'),
     Player = require('../lib/Player'),
     test = require('tap').test,
     _ = require('underscore');
 
 function getAllKeys(obj) {
-    if (obj == Object.prototype || !obj) {
+    if (obj === Object.prototype || !obj) {
         return [];
     }
     return _.union(
